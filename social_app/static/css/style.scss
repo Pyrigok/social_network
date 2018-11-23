@@ -1,0 +1,55 @@
+
+/* message page */
+
+/* users section */
+
+.contacts_list_column{
+	height: 550px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 3px;
+}
+
+.user_div{
+	text-align: center;
+	color: black;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	&:hover{
+		cursor: pointer;
+		background-color: gray;
+	}
+	&:active{
+		background-color: blue;	
+	}
+}
+
+/* end users section */
+
+
+/* message section */
+
+.message_column{
+	height: 550px;
+	background-color: gray;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 3px;
+
+}
+
+.author{
+	background-color: grey;
+	color: black;
+}
+
+.content{
+	text-align: right;
+	background-color: blue;
+	color: white;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	border-radius: 5px;
+}
+
+/* end message section */

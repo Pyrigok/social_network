@@ -18,14 +18,20 @@ class Message_Model(models.Model):
 		blank = False,
 		verbose_name = u'Recipient of Message')
 
-	text = models.CharField(
+	content = models.CharField(
 		max_length = 500,
-		blank = True,
+		blank = False,
 		verbose_name = u'Text of Message')
+
+	status = models.CharField(
+		max_length=10,
+		blank=False,
+		default='not read',
+		verbose_name=u'Status of message')
 
 	created_on = models.DateField(
 		auto_now_add = True,
 		verbose_name=u'Date of message created')
 
-	def __init__(self):
-		return '%s %s %s %s' %(self.author, self.whom, self.text, self.created_on)
+	def __str__(self):
+		return '%s %s %s %s %s' %(self.author, self.whom, self.content, self.status, self.created_on)

@@ -1,43 +1,75 @@
 {% extends 'base.html' %}
 
-{% block 'content' %}
+{% block content %}
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<p>Hello {{request.user}}.<br>You have {{message_count}} unreaded messages from 
+			{% for entry in authors %}
+				{{ entry }} 
+			{% endfor %}!</p>
+		</div>
+	</div>
 
 	<div class="row">
 
 		<!-- users list -->
-		<div class="col-md-4">
+		<div class="col-md-2 contacts_list_column">
 		
-			{% for entry in contacts_list %}
-				<ul>
-					<li>{{ entry.name }} <input type="hidden" value="{{ entry.id }}"></li>
-				</ul>
-			{% endfor %}
+			{% if contacts_list %}
+				{% for entry in contacts_list %}
+					<div class="user_div">
+						
+						<strong>{{ entry }}</strong> <input type="hidden" value="{{ entry.id }}">
+					</div>
+				{% endfor %}
+			{% else %}
+				<p>Contacts List Clean</p>
+			{% endif %}
 
 		</div>
 		<!-- end users list -->
 
 
 		<!-- message history -->
-		<div class="col-md-4">
+		<div class="col-md-4 message_column">
 
-			{% if message_history %}
+			
+
+			{% if cur_recipient %}	
+				{% if message_history %}
+					<div class="author">Message from {% for entry in selected_contact %}
+														 {{entry.username}}
+													 {% endfor %}</div>
+				{% endif %}
 
 				{% for entry in message_history %}
-					{{ entry.text }}
+					<div class="content">{{ entry.content }}</div>
 				{% endfor %}
+
+		
+
+				<form action="{% url 'message_url' %}"
+						enctype="multipart/form-data"
+						method="post"
+						role='form'
+						name="message_form">
+					{% csrf_token %}
+
+							<div class="row">
+								<label for="content">
+									Message for {% for entry in selected_contact %}
+													{{entry.username}}
+												{% endfor %}
+								</label>
+							</div>
+							<textarea name="content" id="content" cols="30" rows="4" value='{{ request.POST.content }}'></textarea>
+							<button type="submit" class="btn btn-success" name="send_button">Send</button>
+				</form>
 
 			{% else %}
 				<p>Message History Clean</p>
 			{% endif %}
-
-			<form action="{% url 'message_url' %}"
-					method='post'
-					enctype='multipart/form-data'>
-						{% csrf_token %}
-
-						<textarea name="text" id="text" cols="30" rows="4"></textarea>
-						<button type="submit" class="btn btn-success" name="send_button">Send</button>
-			</form>
 			
 		</div>
 		<!-- end message history -->
@@ -48,4 +80,4 @@
 
 	</div>
 
-{% endblock 'content' %}
+{% endblock content %}
