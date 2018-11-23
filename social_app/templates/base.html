@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Social Network</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+<body style='display: flex;
+	    min-height: 100vh;
+	    flex-direction: column;'>
+
+	<header style=' top: 0;
+  					left: 0;
+  					right: 0;
+  					padding-bottom: 10px;
+  					box-shadow: 0px 1px 10px 3px #264d00;
+  margin-bottom: 10px;'>
+		<div class="row">
+
+			<div class="col-xs-12 col-md-1 col-md-offset-5 text-center">
+				<a href=#>Github</a>
+			</div>
+
+			{% if request.user.is_authenticated %}
+
+				<div class="col-xs-12 col-md-2 col-md-offset-4">
+					<a href="#">{{ user.username }}</a>
+					<a href="{% url 'account_logout' %}">Logout</a>
+				</div>
+
+			{% else %}
+
+				<div class="col-xs-12 col-md-2 col-md-offset-2">
+					<a href="{% url 'account_signup' %}">Registration</a> |
+					<a href="{% url 'account_login' %}">Login</a>
+				</div>
+
+			{% endif %}
+
+		</div>
+		
+	</header>
+	
+	{% block content %}
+	{% endblock content %}
+
+	<footer style= "<!-- position: fixed;
+					width: 100%;
+				  z-index: 0;
+				  bottom:0;
+				  left: 0; -->
+				  padding: 0;
+				  box-shadow: 0px -1px 10px 3px #264d00;
+				  background-color: #ecf9f2;
+				  padding-top: 10px;
+				  margin-top: 10px;
+				  color: black; 
+				  margin-top: 10px" >
+
+		<div class="row">
+			
+
+			<div class="col-xs-12 col-md-4">
+			
+				<p>&copy; 2018 <span>My first Social Network</span></p>
+			</div>
+
+			<div class="col-xs-12 col-md-2 col-md-offset-6"><p>
+				 Produced by <span style="font-family: 'Pacifico'; font-style: italic">Vasyl Pyrih</span></p>
+			</div>
+		</div>
+
+	</footer>
+
+	<!-- jquery -->
+	<script
+	  src="https://code.jquery.com/jquery-2.2.4.js"
+	  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	  crossorigin="anonymous"></script>
+
+	<!-- bootstrap js -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

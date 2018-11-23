@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+
+	<div class="row">
+
+		<!-- users list -->
+		<div class="col-md-4">
+		
+			{% for entry in contacts_list %}
+				<ul>
+					<li>{{ entry.name }} <input type="hidden" value="{{ entry.id }}"></li>
+				</ul>
+			{% endfor %}
+
+		</div>
+		<!-- end users list -->
+
+
+		<!-- message history -->
+		<div class="col-md-4">
+
+			{% if message_history %}
+
+				{% for entry in message_history %}
+					{{ entry.text }}
+				{% endfor %}
+
+			{% else %}
+				<p>Message History Clean</p>
+			{% endif %}
+
+			<form action="{% url 'message_url' %}"
+					method='post'
+					enctype='multipart/form-data'>
+						{% csrf_token %}
+
+						<textarea name="text" id="text" cols="30" rows="4"></textarea>
+						<button type="submit" class="btn btn-success" name="send_button">Send</button>
+			</form>
+			
+		</div>
+		<!-- end message history -->
+
+
+		<!-- something -->
+		<div class="col-md-4"></div>
+
+	</div>
+
+{% endblock 'content' %}
